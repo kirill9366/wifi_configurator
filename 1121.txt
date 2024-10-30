@@ -1,0 +1,4 @@
+point_D4:6E:0E:41:83:55={'name': 'a', 'frequency': '2', 'power': 2, 'encryption': 'WPA2'}
+point_D4:6E:0E:ac:13:15={'name': 'f', 'frequency': '2', 'power': 2, 'encryption': 'WPA2'}
+point_D4:6E:0E:a3:11:24={'name': 'as', 'frequency': '2', 'power': 4, 'encryption': 'WPA2'}
+point_D4:6E:0E:c1:02:55={'name': 'fwqfwhta', 'frequency': '2', 'power': 4, 'encryption': 'WPA2'}

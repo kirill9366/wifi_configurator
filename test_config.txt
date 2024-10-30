@@ -1,0 +1,2 @@
+point_D4:6E:0E:41:83:55={'name': 'my name', 'frequency': '1', 'power': 5, 'encryption': 'WPA2'}
+point_D4:6E:0E:41:77:55={'name': 'yyhsyycq', 'frequency': '2', 'power': 4, 'encryption': 'WPA2'}

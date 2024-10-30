@@ -1,5 +1,5 @@
 # Класс для работы с конфигурацией (чтение/запись)
-
+import ast
 import os
 
 class Configurator:
@@ -12,7 +12,9 @@ class Configurator:
         with open(self.config_file, 'r') as file:
             data = file.readlines()
         if data:
-            return {line.split('=')[0].strip(): line.split('=')[1].strip() for line in data}
+            returns = {line.split('=')[0].strip(): ast.literal_eval(line.split('=')[1].strip()) for line in data}
+            print(returns)
+            return returns
         else:
             return {}
 

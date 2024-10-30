@@ -17,7 +17,12 @@ class WiFiManager:
     def _connect_ssh(self):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(self.host, username=self.username, password=self.password)
+        ssh.connect(
+            self.host,
+            username=self.username,
+            password=self.password,
+            disabled_algorithms={'pubkeys': ['rsa-sha2-256', 'rsa-sha2-512']}
+        )
         return ssh
 
     def add_new_point(self, mac, name, frequency, power):
@@ -39,11 +44,20 @@ class WiFiManager:
 
     def _run_command(self, command):
         stdin, stdout, stderr = self.ssh.exec_command(command)
+        output = stdout.read().decode()
+        error = stderr.read().decode()
+        
+        if error:
+            print(f"Error executing {command}: {error}")
         return stdout.read().decode(), stderr.read().decode()
+
+    def remove_wifis(self):
+        delete_command = "for iface in $(uci show wireless | grep '.device=' | cut -d. -f2); do uci delete wireless.$iface; done"
+        self._run_command(delete_command)
 
     def create_wifi(self, ssid, encryption='psk2', key='password', network='lan', mode='ap', macaddr=None, frequency='2.4GHz'):
         # Добавляем новую WiFi точку доступа
-        add_command = f"uci set wireless.@wifi-iface[-1]=wifi-iface"
+        add_command = f"uci add wireless wifi-iface"
         self._run_command(add_command)
 
         # Задаем параметры точки доступа

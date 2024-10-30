@@ -6,11 +6,9 @@ from wifi_configurator.utils import generate_random_name
 
 
 class CLI:
-    @property
     def parse_arguments(self):
         parser = argparse.ArgumentParser(description='WiFi Configurator')
         parser.add_argument('--file', type=str, default='config.txt', help='Path to the configuration file')
-        parser.add_argument('action', choices=['new', 'load'], help='Action to perform: create new points or load existing')
         return parser.parse_args()
 
     def get_new_points_input(self):
